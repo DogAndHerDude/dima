@@ -13,3 +13,11 @@ export async function createBooking(data) {
     throw error;
   }
 }
+
+export async function listBookings() {
+  const response = await axios.get(
+    `${import.meta.env.VITE_API_URL}/api/booking/bookings`
+  );
+
+  return response.data;
+}

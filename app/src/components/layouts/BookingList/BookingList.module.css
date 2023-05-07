@@ -1,0 +1,57 @@
+.booking-container {
+  width: 900px;
+  display: flex;
+  flex-direction: row;
+  border: 1px solid #3b82f680;
+  border-radius: 8px;
+  background-color: #0f172a;
+}
+
+.booking-edit {
+  width: 50%;
+}
+
+.booking-edit form {
+  overflow: hidden;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  border-right: 1px solid #3b82f680;
+}
+
+.booking-edit .name {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.booking-edit .name input:first-child {
+  margin: 0 5px 10px 0;
+}
+
+.booking-edit .name input:last-child {
+  margin: 0 0 10px 5px;
+}
+
+.booking-container ul {
+  width: 50%;
+  border-left: 1px solid #3b82f680;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.booking-container ul li {
+  cursor: pointer;
+  padding: 10px 30px;
+  text-align: left;
+  border-bottom: 1px solid #3b82f680;
+}
+.booking-container ul li:hover {
+  background-color: #3b82f680;
+}
+
+.booking-container ul li p {
+  margin: 0;
+}

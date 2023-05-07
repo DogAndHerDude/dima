@@ -1,0 +1,12 @@
+.input {
+  width: 100%;
+  padding: 10px 15px;
+  border: 1px solid #3b82f680;
+  border-radius: 3px;
+  margin: 0 0 10px 0;
+  background-color: #1e293bbf;
+}
+
+.input:disabled {
+  background-color: #3f3f3f;
+}

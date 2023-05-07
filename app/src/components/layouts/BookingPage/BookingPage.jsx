@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { createBooking } from "../../../api-calls";
+import { Input } from "../../Input/Input";
 import styles from "./BookingPage.module.css";
 
 function formDataToObject(data) {
@@ -12,7 +13,7 @@ function formDataToObject(data) {
   return obj;
 }
 
-export function BookingPage({ onSubmit }) {
+export function BookingPage() {
   const formRef = useRef(null);
   const [loading, setLoading] = useState(false);
 
@@ -25,7 +26,6 @@ export function BookingPage({ onSubmit }) {
 
       await createBooking(formDataToObject(data));
       formRef.current?.reset();
-      onSubmit && onSubmit();
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -36,7 +36,7 @@ export function BookingPage({ onSubmit }) {
   return (
     <form ref={formRef} className={styles.form} onSubmit={submitHandler}>
       <div className={styles.name}>
-        <input
+        <Input
           className={styles.input}
           name="firstName"
           type="text"
@@ -44,7 +44,7 @@ export function BookingPage({ onSubmit }) {
           placeholder="First name"
           disabled={loading}
         />
-        <input
+        <Input
           className={styles.input}
           name="lastName"
           type="text"
@@ -54,7 +54,7 @@ export function BookingPage({ onSubmit }) {
         />
       </div>
 
-      <input
+      <Input
         className={styles.input}
         name="email"
         type="email"
@@ -62,7 +62,7 @@ export function BookingPage({ onSubmit }) {
         placeholder="Email"
         disabled={loading}
       />
-      <input
+      <Input
         className={styles.input}
         name="date"
         type="datetime-local"

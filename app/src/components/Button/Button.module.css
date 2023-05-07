@@ -1,0 +1,15 @@
+.button {
+  border-radius: 3px;
+  border: 0;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 600;
+  font-family: inherit;
+  background-color: #0ea5e9;
+  cursor: pointer;
+}
+
+.button:focus,
+.button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
