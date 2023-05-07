@@ -33,9 +33,9 @@ export async function createBooking(request, response) {
 
 export async function listBookings(request, response) {
   try {
-    const bookings = BookingModel.find();
+    const bookings = await BookingModel.find();
 
-    return res.json(bookings);
+    return response.json(bookings);
   } catch (error) {
     console.error(error);
     response.status(500).json(error.message);
@@ -65,7 +65,7 @@ export async function updateBooking(request, response) {
       }
     );
 
-    return res.sendStatus(200);
+    return response.sendStatus(200);
   } catch (error) {
     console.error(error);
     response.status(500).json(error.message);
