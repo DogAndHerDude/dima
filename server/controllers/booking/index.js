@@ -45,6 +45,7 @@ export async function listBookings(request, response) {
 export async function updateBooking(request, response) {
   try {
     if (!validateUpdateBookingBody(request.body)) {
+      console.log(request.body);
       return response.status(400).json({
         message: `One or more parameters missing.`,
       });
@@ -53,9 +54,9 @@ export async function updateBooking(request, response) {
     const { id } = request.params;
     const { firstName, lastName, email, date } = request.body;
 
-    await BookingModel.updateOne(
+    const result = await BookingModel.updateOne(
       {
-        id,
+        _id: id,
       },
       {
         ...(firstName && { firstName }),
@@ -76,7 +77,7 @@ export async function deleteBooking(request, response) {
   try {
     const { id } = request.params;
 
-    await BookingModel.deleteOne({ id });
+    await BookingModel.deleteOne({ _id: id });
 
     return response.sendStatus(200);
   } catch (error) {
