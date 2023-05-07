@@ -1,27 +1,56 @@
 import { useEffect, useState } from "react";
-import { listBookings } from "../../../api-calls";
+import { Delete } from "feather-icons-react";
+import { deleteBooking, listBookings, updateBooking } from "../../../api-calls";
 import { Button } from "../../Button/Button";
 import { Input } from "../../Input/Input";
-import { BookingPage } from "../BookingPage/BookingPage";
 import styles from "./BookingList.module.css";
+import { formDataToObject } from "../../../utils/formDataToObject";
 
 export function BookingList() {
   const [selectedBooking, setSelectedBooking] = useState(null);
   const [bookings, setBookings] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
 
   async function getBookings() {
     try {
-      setLoading(true);
+      const data = await listBookings();
+
+      setBookings(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function handleUpdate(id, event) {
+    try {
+      event.preventDefault();
+      setSubmitting(true);
+
+      const data = new FormData(event.nativeEvent.target);
+
+      await updateBooking(id, formDataToObject(data));
+
+      await getBookings();
+      setSubmitting(false);
+    } catch (error) {
+      console.error(error);
+      setSubmitting(false);
+    }
+  }
+
+  async function handleDelete(id) {
+    try {
+      await deleteBooking(id);
 
       const data = await listBookings();
 
       setBookings(data);
-      setLoading(false);
+
+      if (selectedBooking?._id === id) {
+        setSelectedBooking(null);
+      }
     } catch (error) {
       console.error(error);
-      setLoading(false);
     }
   }
 
@@ -33,34 +62,52 @@ export function BookingList() {
     <div className={styles.bookingContainer}>
       <div className={styles.bookingEdit}>
         {selectedBooking && (
-          <form>
+          <form
+            key={selectedBooking._id}
+            onSubmit={(event) => handleUpdate(selectedBooking._id, event)}
+          >
             <div className={styles.name}>
               <Input
                 name="firstName"
-                value={selectedBooking.firstName}
-                disabled
+                placeholder="First name"
+                defaultValue={selectedBooking.firstName}
               />
               <Input
                 name="lastName"
-                value={selectedBooking.lastName}
-                disabled
+                placeholder="Last name"
+                defaultValue={selectedBooking.lastName}
               />
             </div>
 
-            <Input name="email" value={selectedBooking.email} disabled />
-            <Input name="date" defaultValue={selectedBooking.date} />
+            <Input
+              name="email"
+              placeholder="Email"
+              defaultValue={selectedBooking.email}
+            />
+            <Input
+              name="date"
+              placeholder="Booking date"
+              type="datetime-local"
+              defaultValue={selectedBooking.date.replace("Z", "")}
+            />
 
-            <Button>{!submitting ? "Update booking" : "Updating..."} </Button>
+            <Button disabled={submitting}>
+              {!submitting ? "Update booking" : "Updating..."}
+            </Button>
           </form>
         )}
       </div>
 
       <ul>
         {bookings.map((booking) => (
-          <li key={booking.id} onClick={() => setSelectedBooking(booking)}>
-            <p>
-              {booking.firstName} {booking.lastName}
-            </p>
+          <li key={booking._id}>
+            <div onClick={() => setSelectedBooking(booking)}>
+              <p>
+                {booking.firstName} {booking.lastName}
+              </p>
+            </div>
+
+            <Delete size={14} onClick={() => handleDelete(booking._id)} />
           </li>
         ))}
       </ul>

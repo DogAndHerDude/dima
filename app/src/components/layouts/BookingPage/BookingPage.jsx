@@ -1,17 +1,9 @@
 import { useRef, useState } from "react";
 import { createBooking } from "../../../api-calls";
+import { formDataToObject } from "../../../utils/formDataToObject";
+import { Button } from "../../Button/Button";
 import { Input } from "../../Input/Input";
 import styles from "./BookingPage.module.css";
-
-function formDataToObject(data) {
-  const obj = {};
-
-  for (const entry of data.entries()) {
-    obj[entry[0]] = entry[1];
-  }
-
-  return obj;
-}
 
 export function BookingPage() {
   const formRef = useRef(null);
@@ -71,9 +63,9 @@ export function BookingPage() {
         disabled={loading}
       />
 
-      <button type="submit" disabled={loading}>
+      <Button type="submit" disabled={loading}>
         {loading ? "Submitting..." : "Book"}
-      </button>
+      </Button>
     </form>
   );
 }

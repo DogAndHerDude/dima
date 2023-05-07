@@ -5,6 +5,8 @@
   border: 1px solid #3b82f680;
   border-radius: 8px;
   background-color: #0f172a;
+  overflow: hidden;
+  overflow-y: scroll;
 }
 
 .booking-edit {
@@ -12,12 +14,9 @@
 }
 
 .booking-edit form {
-  overflow: hidden;
-  overflow-y: scroll;
   display: flex;
   flex-direction: column;
   padding: 30px;
-  border-right: 1px solid #3b82f680;
 }
 
 .booking-edit .name {
@@ -43,6 +42,10 @@
 }
 
 .booking-container ul li {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   cursor: pointer;
   padding: 10px 30px;
   text-align: left;
@@ -52,6 +55,13 @@
   background-color: #3b82f680;
 }
 
+.booking-container ul li div {
+  width: 100%;
+}
+
 .booking-container ul li p {
   margin: 0;
+}
+.booking-container ul li svg:hover {
+  stroke: #fe4d4d;
 }
