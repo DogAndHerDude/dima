@@ -105,8 +105,10 @@ export function BookingList() {
           <li key={booking._id}>
             <div onClick={() => setSelectedBooking(booking)}>
               <p>
-                {booking.firstName} {booking.lastName}
+                {booking.firstName} {booking.lastName}{" "}
               </p>
+              <p>{booking.email}</p>
+              <p>{new Date(booking.date).toLocaleString()}</p>
             </div>
 
             <Delete size={14} onClick={() => handleDelete(booking._id)} />
