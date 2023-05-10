@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { createBooking } from "../../../api-calls";
 import { formDataToObject } from "../../../utils/formDataToObject";
 import { Button } from "../../Button/Button";
+import { Card } from "../../Card/Card";
 import { Input } from "../../Input/Input";
 import styles from "./BookingPage.module.css";
 
@@ -26,46 +27,48 @@ export function BookingPage() {
   }
 
   return (
-    <form ref={formRef} className={styles.form} onSubmit={submitHandler}>
-      <div className={styles.name}>
+    <Card>
+      <form className={styles.form} ref={formRef} onSubmit={submitHandler}>
+        <div className={styles.name}>
+          <Input
+            className={styles.input}
+            name="firstName"
+            type="text"
+            required
+            placeholder="First name"
+            disabled={loading}
+          />
+          <Input
+            className={styles.input}
+            name="lastName"
+            type="text"
+            required
+            placeholder="Last name"
+            disabled={loading}
+          />
+        </div>
+
         <Input
           className={styles.input}
-          name="firstName"
-          type="text"
+          name="email"
+          type="email"
           required
-          placeholder="First name"
+          placeholder="Email"
           disabled={loading}
         />
         <Input
           className={styles.input}
-          name="lastName"
-          type="text"
+          name="date"
+          type="datetime-local"
           required
-          placeholder="Last name"
+          placeholder="Booking date"
           disabled={loading}
         />
-      </div>
 
-      <Input
-        className={styles.input}
-        name="email"
-        type="email"
-        required
-        placeholder="Email"
-        disabled={loading}
-      />
-      <Input
-        className={styles.input}
-        name="date"
-        type="datetime-local"
-        required
-        placeholder="Booking date"
-        disabled={loading}
-      />
-
-      <Button type="submit" disabled={loading}>
-        {loading ? "Submitting..." : "Book"}
-      </Button>
-    </form>
+        <Button type="submit" disabled={loading}>
+          {loading ? "Submitting..." : "Book"}
+        </Button>
+      </form>
+    </Card>
   );
 }

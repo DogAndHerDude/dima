@@ -1,0 +1,28 @@
+.navigation {
+  width: 414px;
+  padding: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navigation a {
+  width: 100%;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px 0;
+}
+
+.navigation a.current {
+  background-color: #0ea5e9;
+}
+
+.navigation a:first-child {
+  margin-right: 5px;
+}
+
+.navigation a:last-child {
+  margin-left: 5px;
+}

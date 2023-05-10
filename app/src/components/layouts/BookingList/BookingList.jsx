@@ -5,6 +5,7 @@ import { Button } from "../../Button/Button";
 import { Input } from "../../Input/Input";
 import styles from "./BookingList.module.css";
 import { formDataToObject } from "../../../utils/formDataToObject";
+import { Card } from "../../Card/Card";
 
 export function BookingList() {
   const [selectedBooking, setSelectedBooking] = useState(null);
@@ -59,8 +60,9 @@ export function BookingList() {
   }, []);
 
   return (
-    <div className={styles.bookingContainer}>
+    <Card className={styles.bookingContainer}>
       <div className={styles.bookingEdit}>
+        {!selectedBooking && <h2>Select a booking to edit</h2>}
         {selectedBooking && (
           <form
             key={selectedBooking._id}
@@ -111,6 +113,6 @@ export function BookingList() {
           </li>
         ))}
       </ul>
-    </div>
+    </Card>
   );
 }

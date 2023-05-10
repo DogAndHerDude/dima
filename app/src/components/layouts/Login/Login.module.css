@@ -1,0 +1,16 @@
+.wrapper {
+  width: 414px;
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+}
+
+.error {
+  width: 414px;
+  padding: 5px 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  background-color: #fe4d4d;
+}
